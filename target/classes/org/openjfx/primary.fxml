@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.PrimaryController">
+   <top>
+      <Pane prefHeight="51.0" prefWidth="600.0" style="-fx-background-color: #ff526c;" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="504.0" layoutY="13.0" mnemonicParsing="false" onAction="#switchToLogin" style="-fx-background-color: none;" stylesheets="@styles.css" text="Log-In" textAlignment="CENTER" textFill="WHITE" />
+            <Button layoutX="461.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: none;" stylesheets="@styles.css" text="User" textAlignment="CENTER" textFill="WHITE" />
+            <Text fill="WHITE" layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cool Elevator HMI">
+               <font>
+                  <Font name="System Bold Italic" size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </top>
+   <left>
+      <SplitPane dividerPositions="0.6210374639769453" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="241.0" prefWidth="156.0">
+               <children>
+                  <Button layoutX="32.0" layoutY="45.0" mnemonicParsing="false" onAction="#send3" text="3" />
+                  <Button layoutX="94.0" layoutY="45.0" mnemonicParsing="false" onAction="#send4" text="4" />
+                  <Button layoutX="94.0" layoutY="82.0" mnemonicParsing="false" onAction="#send2" text="2" />
+                  <Button layoutX="32.0" layoutY="82.0" mnemonicParsing="false" onAction="#send1" text="1" />
+                  <Button layoutX="87.0" layoutY="122.0" mnemonicParsing="false" onAction="#openDoor" text="&lt;  &gt;" />
+                  <Button layoutX="87.0" layoutY="160.0" mnemonicParsing="false" onAction="#closeDoor" text="&gt;  &lt;" />
+                  <Text layoutX="45.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Control Panel" />
+                  <Button layoutX="20.0" layoutY="122.0" mnemonicParsing="false" onAction="#Stop" text="STOP" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="158.0" />
+        </items>
+      </SplitPane>
+   </left>
+   <center>
+      <SplitPane dividerPositions="0.484149855907781" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="64.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/closed.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="264.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/closed.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="294.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4th Floor" wrappingWidth="51.7158203125" />
+                  <Text layoutX="94.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3rd Floor" wrappingWidth="51.7158203125" />
+                  <Button layoutX="219.0" layoutY="82.0" mnemonicParsing="false" onAction="#sendDown4" rotate="-90.0" text="&lt;" />
+                  <Button layoutX="33.0" layoutY="66.0" mnemonicParsing="false" onAction="#sendUp3" rotate="90.0" text="&lt;" />
+                  <Button layoutX="33.0" layoutY="98.0" mnemonicParsing="false" onAction="#sendDown3" rotate="270.0" text="&lt;" />
+                  <Circle fill="#36ff21" layoutX="45.0" layoutY="46.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#ff1f1f" layoutX="232.0" layoutY="46.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="178.0" prefWidth="438.0">
+               <children>
+                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="266.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/closed.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="62.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/closed.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="95.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1st Floor" wrappingWidth="45.7158203125" />
+                  <Text layoutX="299.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2n Floor" wrappingWidth="45.7158203125" />
+                  <Button layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#sendUp1" rotate="90.0" text="&lt;" />
+                  <Button layoutX="234.0" layoutY="62.0" mnemonicParsing="false" onAction="#sendUp2" rotate="90.0" text="&lt;" />
+                  <Button layoutX="234.0" layoutY="94.0" mnemonicParsing="false" onAction="#sendDown2" rotate="270.0" text="&lt;" />
+                  <Circle fill="#ff1f1f" layoutX="35.0" layoutY="36.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="#ff1f1f" layoutX="247.0" layoutY="36.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
