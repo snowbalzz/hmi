@@ -7,13 +7,14 @@ import javafx.scene.control.TextField;
 
 public class PrimaryController {
 
-
+    private static MQTTConnection mqtt;
     static Logging Logger = new Logging();
-    static MQTTConnection mqtt = new MQTTConnection();
 
     public PrimaryController() {
+        mqtt = new MQTTConnection();
         mqtt.SubToMqtt();
     }
+
 
     @FXML
     private TextField username;

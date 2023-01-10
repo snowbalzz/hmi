@@ -18,7 +18,7 @@ public class MQTTConnection {
     private static MqttClient pClient;
     private static MqttClient sClient;
 
-    private String pClientId = "Subsriber_HMI!";
+    private String pClientId = "Subscriber_HMI!";
     private String sClientId = "Publisher_HMI!";
 
     private String publishTopic = "/22WS-SysArch/H1";
