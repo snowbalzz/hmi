@@ -8,7 +8,12 @@ import javafx.scene.control.TextField;
 public class PrimaryController {
 
 
-    Logging Logger = new Logging();
+    static Logging Logger = new Logging();
+    static MQTTConnection mqtt = new MQTTConnection();
+
+    public PrimaryController() {
+        mqtt.SubToMqtt();
+    }
 
     @FXML
     private TextField username;
@@ -35,7 +40,7 @@ public class PrimaryController {
     // Login check
     private void checkLoging() throws IOException {
         if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
-             App.setRoot("primary_admin");
+            App.setRoot("primary_admin");
         }
         else if(username.getText().isEmpty() && password.getText().isEmpty()) {
             System.out.println("No Input!");
@@ -51,24 +56,28 @@ public class PrimaryController {
     @FXML
     void send1() throws IOException {
         // MQTT CAll here
+        mqtt.PublishExample("Floor 1");
         Logger.logged("Go Floor 1!");
     }
 
     @FXML
     void send2() throws IOException {
         // MQTT CAll here
+        mqtt.PublishExample("Floor 2");
         Logger.logged("Go Floor 2!");
     }
 
     @FXML
     void send3() throws IOException {
         // MQTT CAll here
+        mqtt.PublishExample("Floor 3");
         Logger.logged("Go to Floor 3!");
     }
 
     @FXML
     void send4() throws IOException {
         // MQTT CAll here
+        mqtt.PublishExample("Floor 4");
         Logger.logged("Go to Floor 4!");
     }
 
