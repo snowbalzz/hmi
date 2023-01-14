@@ -21,7 +21,7 @@ public class PrimaryController implements ControllerEventListener{
     static Logging Logger = new Logging();
 
     @FXML
-    private TextField username;
+    private TextField username, error;
     @FXML
     private PasswordField password;
 
@@ -38,7 +38,10 @@ public class PrimaryController implements ControllerEventListener{
     private ImageView level4;
 
     @FXML
-    private Text door;
+    private Text flooridc;
+
+    @FXML
+    private Text outidc1, outidc2, outidc3, outidc4;
 
     Image doorOpenImage = new Image(new FileInputStream("src/main/resources/img/open.png"));
     Image doorClosedImage = new Image(new FileInputStream("src/main/resources/img/closed.png"));
@@ -90,43 +93,42 @@ public class PrimaryController implements ControllerEventListener{
     //-----------------------------------------------------------------//
     @FXML
     void send1() throws IOException {
-//        level1_door.setImage(doorOpen);
-//        RequestJSON json = new RequestJSON();
-//        json.setFloorSelection(1);
-//        json.setTimestamp(String.valueOf(new Date()));
-//        mqtt.PublishAction(json);
-//        Logger.logged("Go Floor 1!");
-        mqtt.FakeData("open", 1);
+        RequestJSON json = new RequestJSON();
+        json.setFloorSelection(1);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
+        Logger.logged("Go Floor 1!");
+//        mqtt.FakeData("open", 1);
     }
 
     @FXML
     void send2() throws IOException {
-//        RequestJSON json = new RequestJSON();
-//        json.setFloorSelection(2);
-//        json.setTimestamp(String.valueOf(new Date()));
-//        mqtt.PublishAction(json);
-//        Logger.logged("Go Floor 2!");
-        mqtt.FakeData("open", 2);
+        RequestJSON json = new RequestJSON();
+        json.setFloorSelection(2);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
+        Logger.logged("Go Floor 2!");
+//        mqtt.FakeData("open", 2);
     }
 
     @FXML
     void send3() throws IOException {
-//        RequestJSON json = new RequestJSON();
-//        json.setFloorSelection(3);
-//        json.setTimestamp(String.valueOf(new Date()));
-//        mqtt.PublishAction(json);
-//        Logger.logged("Go to Floor 3!");
-        mqtt.FakeData("open", 3);
+        RequestJSON json = new RequestJSON();
+        json.setFloorSelection(3);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
+        Logger.logged("Go to Floor 3!");
+//        mqtt.FakeData("open", 3);
     }
 
     @FXML
     void send4() throws IOException {
-//        RequestJSON json = new RequestJSON();
-//        json.setFloorSelection(4);
-//        json.setTimestamp(String.valueOf(new Date()));
-//        mqtt.PublishAction(json);
-//        Logger.logged("Go to Floor 4!");
-        mqtt.FakeData("open", 4);
+        RequestJSON json = new RequestJSON();
+        json.setFloorSelection(4);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
+        Logger.logged("Go to Floor 4!");
+//        mqtt.FakeData("open", 4);
     }
 
     @FXML
@@ -144,7 +146,6 @@ public class PrimaryController implements ControllerEventListener{
         json.setDoorButton("open");
         json.setTimestamp(String.valueOf(new Date()));
         mqtt.PublishAction(json);
-//        level1_door.setImage(doorOpen);
         Logger.logged("Opening Door!");
     }
 
@@ -259,36 +260,23 @@ public class PrimaryController implements ControllerEventListener{
     }
 
     @Override
-    public void viewChanges(String changes) {
+    public void viewChanges(String changes, String errorText) {
         switch (changes){
-//            case "open":
-//                System.out.println("open");
-//                Platform.runLater(new Runnable(){
-//                    @Override
-//                    public void run() {
-//                        level1.setImage(doorOpenImage);
-//                    }
-//                });
-//                break;
-//            case "closed":
-//                Platform.runLater(new Runnable(){
-//                    @Override
-//                    public void run() {
-//                        level1.setImage(doorClosedImage);
-//                    }
-//                });
-//                System.out.println("closed");
-//                break;
             case "pos1closed":
                 System.out.println("At Level 1");
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        door.setText("At Floor: 1");
+                        flooridc.setText("At Floor: 1");
                         level1.setImage(doorClosedImage);
                         level2.setImage(doorClosedImage);
                         level3.setImage(doorClosedImage);
                         level4.setImage(doorClosedImage);
+                        outidc1.setText("F:1");
+                        outidc2.setText("F:1");
+                        outidc3.setText("F:1");
+                        outidc4.setText("F:1");
+                        error.setText(errorText);
                     }
                 });
                 break;
@@ -297,11 +285,16 @@ public class PrimaryController implements ControllerEventListener{
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        door.setText("At Floor: 2");
+                        flooridc.setText("At Floor: 2");
                         level1.setImage(doorClosedImage);
                         level2.setImage(doorClosedImage);
                         level3.setImage(doorClosedImage);
                         level4.setImage(doorClosedImage);
+                        outidc1.setText("F:2");
+                        outidc2.setText("F:2");
+                        outidc3.setText("F:2");
+                        outidc4.setText("F:2");
+                        error.setText(errorText);
                     }
                 });
                 break;
@@ -310,11 +303,16 @@ public class PrimaryController implements ControllerEventListener{
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        door.setText("At Floor: 3");
+                        flooridc.setText("At Floor: 3");
                         level1.setImage(doorClosedImage);
                         level2.setImage(doorClosedImage);
                         level3.setImage(doorClosedImage);
                         level4.setImage(doorClosedImage);
+                        outidc1.setText("F:3");
+                        outidc2.setText("F:3");
+                        outidc3.setText("F:3");
+                        outidc4.setText("F:3");
+                        error.setText(errorText);
                     }
                 });
                 break;
@@ -323,11 +321,16 @@ public class PrimaryController implements ControllerEventListener{
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        door.setText("At Floor: 4");
+                        flooridc.setText("At Floor: 4");
                         level1.setImage(doorClosedImage);
                         level2.setImage(doorClosedImage);
                         level3.setImage(doorClosedImage);
                         level4.setImage(doorClosedImage);
+                        outidc1.setText("F:4");
+                        outidc2.setText("F:4");
+                        outidc3.setText("F:4");
+                        outidc4.setText("F:4");
+                        error.setText(errorText);
                     }
                 });
                 break;
@@ -336,11 +339,16 @@ public class PrimaryController implements ControllerEventListener{
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        door.setText("At Floor: 1");
+                        flooridc.setText("At Floor: 1");
                         level1.setImage(doorOpenImage);
                         level2.setImage(doorClosedImage);
                         level3.setImage(doorClosedImage);
                         level4.setImage(doorClosedImage);
+                        outidc1.setText("F:1");
+                        outidc2.setText("F:1");
+                        outidc3.setText("F:1");
+                        outidc4.setText("F:1");
+                        error.setText(errorText);
                     }
                 });
                 break;
@@ -349,11 +357,16 @@ public class PrimaryController implements ControllerEventListener{
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        door.setText("At Floor: 2");
+                        flooridc.setText("At Floor: 2");
                         level1.setImage(doorClosedImage);
                         level2.setImage(doorOpenImage);
                         level3.setImage(doorClosedImage);
                         level4.setImage(doorClosedImage);
+                        outidc1.setText("F:2");
+                        outidc2.setText("F:2");
+                        outidc3.setText("F:2");
+                        outidc4.setText("F:2");
+                        error.setText(errorText);
                     }
                 });
                 break;
@@ -362,11 +375,16 @@ public class PrimaryController implements ControllerEventListener{
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        door.setText("At Floor: 3");
+                        flooridc.setText("At Floor: 3");
                         level1.setImage(doorClosedImage);
                         level2.setImage(doorClosedImage);
                         level3.setImage(doorOpenImage);
                         level4.setImage(doorClosedImage);
+                        outidc1.setText("F:3");
+                        outidc2.setText("F:3");
+                        outidc3.setText("F:3");
+                        outidc4.setText("F:3");
+                        error.setText(errorText);
                     }
                 });
                 break;
@@ -375,11 +393,16 @@ public class PrimaryController implements ControllerEventListener{
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        door.setText("At Floor: 4");
+                        flooridc.setText("At Floor: 4");
                         level1.setImage(doorClosedImage);
                         level2.setImage(doorClosedImage);
                         level3.setImage(doorClosedImage);
                         level4.setImage(doorOpenImage);
+                        outidc1.setText("F:4");
+                        outidc2.setText("F:4");
+                        outidc3.setText("F:4");
+                        outidc4.setText("F:4");
+                        error.setText(errorText);
                     }
                 });
                 break;

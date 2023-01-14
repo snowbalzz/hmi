@@ -21,28 +21,27 @@ public class Elevator implements ElevatorListener {
 
 
     @Override
-    public void elevatorChange(String doorStatus, Integer level) {
+    public void elevatorChange(String doorStatus, Integer level, String error) {
         if(Objects.equals(doorStatus, "closed")){
             if(level == 1){
-                controllerEventListener.viewChanges("pos1closed");
+                controllerEventListener.viewChanges("pos1closed", error);
             }else if(level == 2){
-                controllerEventListener.viewChanges("pos2closed");
+                controllerEventListener.viewChanges("pos2closed", error);
             }else if(level == 3){
-                controllerEventListener.viewChanges("pos3closed");
+                controllerEventListener.viewChanges("pos3closed", error);
             }else if(level == 4){
-                controllerEventListener.viewChanges("pos4closed");
+                controllerEventListener.viewChanges("pos4closed", error);
             }
         } else if (Objects.equals(doorStatus, "open")){
             if(level == 1){
-                controllerEventListener.viewChanges("pos1open");
+                controllerEventListener.viewChanges("pos1open", error);
             }else if(level == 2){
-                controllerEventListener.viewChanges("pos2open");
+                controllerEventListener.viewChanges("pos2open", error);
             }else if(level == 3){
-                controllerEventListener.viewChanges("pos3open");
+                controllerEventListener.viewChanges("pos3open", error);
             }else if(level == 4){
-                controllerEventListener.viewChanges("pos4open");
+                controllerEventListener.viewChanges("pos4open", error);
             }
         }
-
     }
 }

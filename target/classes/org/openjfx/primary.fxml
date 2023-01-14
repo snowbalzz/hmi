@@ -2,12 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -30,19 +30,24 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="241.0" prefWidth="156.0">
                <children>
-                  <Button layoutX="32.0" layoutY="45.0" mnemonicParsing="false" onAction="#send3" text="3" />
-                  <Button layoutX="94.0" layoutY="45.0" mnemonicParsing="false" onAction="#send4" text="4" />
-                  <Button layoutX="94.0" layoutY="82.0" mnemonicParsing="false" onAction="#send2" text="2" />
-                  <Button layoutX="32.0" layoutY="82.0" mnemonicParsing="false" onAction="#send1" text="1" />
-                  <Button layoutX="87.0" layoutY="122.0" mnemonicParsing="false" onAction="#openDoor" text="&lt;  &gt;" />
-                  <Button layoutX="87.0" layoutY="160.0" mnemonicParsing="false" onAction="#closeDoor" text="&gt;  &lt;" />
-                  <Text layoutX="45.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Control Panel" />
-                  <Button layoutX="20.0" layoutY="122.0" mnemonicParsing="false" onAction="#Stop" text="STOP" />
+                  <Button layoutX="32.0" layoutY="70.0" mnemonicParsing="false" onAction="#send3" text="3" />
+                  <Button layoutX="94.0" layoutY="70.0" mnemonicParsing="false" onAction="#send4" text="4" />
+                  <Button layoutX="94.0" layoutY="107.0" mnemonicParsing="false" onAction="#send2" text="2" />
+                  <Button layoutX="34.0" layoutY="107.0" mnemonicParsing="false" onAction="#send1" text="1" />
+                  <Button layoutX="87.0" layoutY="135.0" mnemonicParsing="false" onAction="#openDoor" text="&lt;  &gt;" />
+                  <Button layoutX="87.0" layoutY="174.0" mnemonicParsing="false" onAction="#closeDoor" text="&gt;  &lt;" />
+                  <Text layoutX="26.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Control Panel">
+                     <font>
+                        <Font name="System Bold Italic" size="19.0" />
+                     </font></Text>
+                  <Button layoutX="20.0" layoutY="135.0" mnemonicParsing="false" onAction="#Stop" text="STOP" />
+                  <Text fx:id="flooridc" layoutX="51.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="At Floor: 0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="158.0">
                <children>
-                  <Text fx:id="door" layoutX="67.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <TextField fx:id="error" layoutX="14.0" layoutY="92.0" prefHeight="20.0" prefWidth="130.0" />
+                  <Text layoutX="14.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error State" />
                </children></AnchorPane>
         </items>
       </SplitPane>
@@ -64,11 +69,11 @@
                   </ImageView>
                   <Text layoutX="294.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4th Floor" wrappingWidth="51.7158203125" />
                   <Text layoutX="94.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3rd Floor" wrappingWidth="51.7158203125" />
-                  <Button layoutX="219.0" layoutY="82.0" mnemonicParsing="false" onAction="#sendDown4" rotate="-90.0" text="&lt;" />
+                  <Button layoutX="232.0" layoutY="79.0" mnemonicParsing="false" onAction="#sendDown4" rotate="-90.0" text="&lt;" />
                   <Button layoutX="33.0" layoutY="66.0" mnemonicParsing="false" onAction="#sendUp3" rotate="90.0" text="&lt;" />
                   <Button layoutX="33.0" layoutY="98.0" mnemonicParsing="false" onAction="#sendDown3" rotate="270.0" text="&lt;" />
-                  <Circle fx:id="level3_idc" fill="#36ff21" layoutX="45.0" layoutY="46.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="level4_idc" fill="#ff1f1f" layoutX="232.0" layoutY="46.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text fx:id="outidc3" layoutX="37.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F:0" />
+                  <Text fx:id="outidc4" layoutX="236.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F:0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="178.0" prefWidth="438.0">
@@ -85,11 +90,11 @@
                   </ImageView>
                   <Text layoutX="95.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1st Floor" wrappingWidth="45.7158203125" />
                   <Text layoutX="299.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2n Floor" wrappingWidth="45.7158203125" />
-                  <Button layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#sendUp1" rotate="90.0" text="&lt;" />
+                  <Button layoutX="35.0" layoutY="75.0" mnemonicParsing="false" onAction="#sendUp1" rotate="90.0" text="&lt;" />
                   <Button layoutX="234.0" layoutY="62.0" mnemonicParsing="false" onAction="#sendUp2" rotate="90.0" text="&lt;" />
                   <Button layoutX="234.0" layoutY="94.0" mnemonicParsing="false" onAction="#sendDown2" rotate="270.0" text="&lt;" />
-                  <Circle fx:id="level1_idc" fill="#ff1f1f" layoutX="35.0" layoutY="36.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="level2_idc" fill="#ff1f1f" layoutX="247.0" layoutY="36.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text fx:id="outidc2" layoutX="238.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F:0" />
+                  <Text fx:id="outidc1" layoutX="39.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F:0" />
                </children>
             </AnchorPane>
         </items>

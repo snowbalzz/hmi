@@ -2,12 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -30,18 +30,22 @@
          <items>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="19.0" layoutY="34.0" mnemonicParsing="false" onAction="#send4" text="4" />
-                  <Button layoutX="93.0" layoutY="34.0" mnemonicParsing="false" onAction="#send3" text="3" />
-                  <Button layoutX="93.0" layoutY="73.0" mnemonicParsing="false" onAction="#send2" text="2" />
-                  <Button layoutX="20.0" layoutY="73.0" mnemonicParsing="false" onAction="#send1" text="1" />
-                  <Button layoutX="86.0" layoutY="114.0" mnemonicParsing="false" onAction="#openDoor" text="&lt;  &gt;" />
-                  <Button layoutX="85.0" layoutY="148.0" mnemonicParsing="false" onAction="#closeDoor" text="&gt;  &lt;" />
+                  <Button layoutX="24.0" layoutY="59.0" mnemonicParsing="false" onAction="#send4" text="4" />
+                  <Button layoutX="105.0" layoutY="59.0" mnemonicParsing="false" onAction="#send3" text="3" />
+                  <Button layoutX="105.0" layoutY="86.0" mnemonicParsing="false" onAction="#send2" text="2" />
+                  <Button layoutX="25.0" layoutY="86.0" mnemonicParsing="false" onAction="#send1" text="1" />
+                  <Button layoutX="98.0" layoutY="114.0" mnemonicParsing="false" onAction="#openDoor" text="&lt;  &gt;" />
+                  <Button layoutX="98.0" layoutY="149.0" mnemonicParsing="false" onAction="#closeDoor" text="&gt;  &lt;" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Control Panel" />
                   <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supervisor Control Panel" />
                   <Button layoutX="12.0" layoutY="114.0" mnemonicParsing="false" onAction="#Stop" text="STOP" />
-                  <Button layoutX="82.0" layoutY="239.0" mnemonicParsing="false" onKeyPressed="#manualDoorOpenStart" onKeyReleased="#manualDoorStop" text="MDO" />
-                  <Button layoutX="51.0" layoutY="276.0" mnemonicParsing="false" onAction="#reset" text="RESET" />
-                  <Button layoutX="21.0" layoutY="239.0" mnemonicParsing="false" onKeyPressed="#manualDoorCloseStart" onKeyReleased="#manualDoorStop" text="MDC" />
+                  <Button layoutX="94.0" layoutY="227.0" mnemonicParsing="false" onKeyPressed="#manualDoorOpenStart" onKeyReleased="#manualDoorStop" text="MDO" />
+                  <Button layoutX="51.0" layoutY="259.0" mnemonicParsing="false" onAction="#reset" text="RESET" />
+                  <Button layoutX="21.0" layoutY="227.0" mnemonicParsing="false" onKeyPressed="#manualDoorCloseStart" onKeyReleased="#manualDoorStop" text="MDC" />
+                  <TextField fx:id="error" layoutX="13.0" layoutY="308.0" prefHeight="25.0" prefWidth="134.0" />
+                  <Text fx:id="flooridc" layoutX="51.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="At Floor: 0" />
+                  <Text layoutX="15.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error State" />
+                  <Text layoutX="30.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUP. FUNCTIONS" />
                </children>
             </Pane>
          </items>
@@ -52,12 +56,12 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="64.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="level3" fitHeight="139.0" fitWidth="111.0" layoutX="64.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../img/closed.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="264.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="level4" fitHeight="139.0" fitWidth="111.0" layoutX="264.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../img/closed.png" />
                      </image>
@@ -67,29 +71,29 @@
                   <Button layoutX="219.0" layoutY="82.0" mnemonicParsing="false" onAction="#sendDown4" rotate="-90.0" text="&lt;" />
                   <Button layoutX="30.0" layoutY="65.0" mnemonicParsing="false" onAction="#sendUp3" rotate="90.0" text="&lt;" />
                   <Button layoutX="30.0" layoutY="97.0" mnemonicParsing="false" onAction="#sendDown3" rotate="270.0" text="&lt;" />
-                  <Circle fill="#36ff21" layoutX="43.0" layoutY="39.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fill="#ff2121" layoutX="232.0" layoutY="44.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text fx:id="outidc4" layoutX="223.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F:0" />
+                  <Text fx:id="outidc3" layoutX="34.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F:0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="178.0" prefWidth="438.0">
                <children>
-                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="266.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="level2" fitHeight="139.0" fitWidth="111.0" layoutX="266.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../img/closed.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="62.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="level1" fitHeight="139.0" fitWidth="111.0" layoutX="62.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../img/closed.png" />
                      </image>
                   </ImageView>
                   <Text layoutX="95.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1st Floor" wrappingWidth="45.7158203125" />
                   <Text layoutX="299.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2n Floor" wrappingWidth="45.7158203125" />
-                  <Button layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#sendUp3" rotate="90.0" text="&lt;" />
+                  <Button layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#sendUp1" rotate="90.0" text="&lt;" />
                   <Button layoutX="234.0" layoutY="62.0" mnemonicParsing="false" onAction="#sendUp2" rotate="90.0" text="&lt;" />
                   <Button layoutX="234.0" layoutY="94.0" mnemonicParsing="false" onAction="#sendDown2" rotate="270.0" text="&lt;" />
-                  <Circle fill="#ff2121" layoutX="247.0" layoutY="32.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fill="#ff2121" layoutX="35.0" layoutY="32.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text fx:id="outidc2" layoutX="237.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F:0" wrappingWidth="20.7158203125" />
+                  <Text fx:id="outidc1" layoutX="25.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F:0" wrappingWidth="20.7158203125" />
                </children>
             </AnchorPane>
         </items>

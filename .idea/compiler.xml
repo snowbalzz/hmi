@@ -6,8 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="hmi" />
+        <module name="hmi_test_working" />
         <module name="hellofx" />
+        <module name="hmi" />
         <module name="trying" />
       </profile>
     </annotationProcessing>
