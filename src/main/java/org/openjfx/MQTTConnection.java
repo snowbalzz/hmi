@@ -1,8 +1,9 @@
 package org.openjfx;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.eclipse.paho.client.mqttv3.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class MQTTConnection {
@@ -15,6 +16,9 @@ public class MQTTConnection {
      * - Created Mqtt connection class basic;
      *
      */
+
+    private ElevatorClass elevatorClass;
+
     private static MqttClient pClient;
     private static MqttClient sClient;
 
@@ -37,6 +41,7 @@ public class MQTTConnection {
      */
     public void ServiceConnections()  {
         try {
+//            ssh -L 1888:localhost:1883 FHKN.da351ale@ea-pc165.ei.htwg-konstanz.de
             sClient = new MqttClient("tcp://localhost:1888", sClientId, null);
             pClient = new MqttClient("tcp://localhost:1888", pClientId, null);
 
@@ -52,7 +57,7 @@ public class MQTTConnection {
         }
     }
 
-    public void SubToMqtt(){
+    public void SubToMqtt(Elevator elevartor){
         try {
             sClient.subscribe(subscribeTopic);
             Logger.logged("Subscribed to:" + subscribeTopic + "");
@@ -65,8 +70,14 @@ public class MQTTConnection {
                 }
 
                 @Override
-                public void messageArrived(String topic, MqttMessage m) {
-                    Logger.logged("The Subscription from " + topic + ": " + m.toString());
+                public void messageArrived(String topic, MqttMessage m) throws JsonProcessingException {
+//                    Logger.logged("The Subscription from " + topic + ": " + m.toString());
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    elevatorClass = objectMapper.readValue(m.toString(), ElevatorClass.class);
+
+                    elevartor.elevatorChange(elevatorClass.getDoorStatus(), elevatorClass.getCurrentFloor());
+
+//                    Logger.logged("DatafromC1: " + elevatorClass.getCurrentFloor() + elevatorClass.getDoorStatus() + elevatorClass.getErrorState() + elevatorClass.getTimestamp());
                 }
 
                 @Override
@@ -80,17 +91,37 @@ public class MQTTConnection {
         }
     }
 
-    public void PublishExample(String value){
+    public void PublishAction(RequestJSON request){
         try{
-            Date date = new Date();
-            String m = "{FloorRequest:"+value+", Time: "+date+"}";
+            ObjectMapper objectMapper = new ObjectMapper();
+            String m = objectMapper.writeValueAsString(request);
             MqttMessage message = new MqttMessage();
             message.setPayload(m.getBytes());
             pClient.publish(publishTopic, message);
         } catch (MqttException m){
             Logger.logged(m.toString());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-
     }
+
+        public void FakeData(String state, Integer loc){
+        try{
+            PublishJson publishJson = new PublishJson();
+            publishJson.setCurrentFloor(loc);
+            publishJson.setDoorStatus(state);
+            publishJson.setErrorState("NO Error!");
+            publishJson.setTimestamp(String.valueOf(new Date()));
+            ObjectMapper objectMapper = new ObjectMapper();
+            String m = objectMapper.writeValueAsString(publishJson);
+            MqttMessage message = new MqttMessage();
+            message.setPayload(m.getBytes());
+            pClient.publish(publishTopic, message);
+        } catch (MqttException m){
+            Logger.logged(m.toString());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        }
 
 }

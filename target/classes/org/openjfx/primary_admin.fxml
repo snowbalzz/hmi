@@ -39,9 +39,9 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Control Panel" />
                   <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supervisor Control Panel" />
                   <Button layoutX="12.0" layoutY="114.0" mnemonicParsing="false" onAction="#Stop" text="STOP" />
-                  <Button layoutX="82.0" layoutY="239.0" mnemonicParsing="false" onAction="#manualDoorOpen" text="MDO" />
-                  <Button layoutX="51.0" layoutY="276.0" mnemonicParsing="false" onAction="#manualUp" text="RESET" />
-                  <Button layoutX="21.0" layoutY="239.0" mnemonicParsing="false" onAction="#manualDoorClose" text="MDC" />
+                  <Button layoutX="82.0" layoutY="239.0" mnemonicParsing="false" onKeyPressed="#manualDoorOpenStart" onKeyReleased="#manualDoorStop" text="MDO" />
+                  <Button layoutX="51.0" layoutY="276.0" mnemonicParsing="false" onAction="#reset" text="RESET" />
+                  <Button layoutX="21.0" layoutY="239.0" mnemonicParsing="false" onKeyPressed="#manualDoorCloseStart" onKeyReleased="#manualDoorStop" text="MDC" />
                </children>
             </Pane>
          </items>

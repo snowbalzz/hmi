@@ -40,7 +40,10 @@
                   <Button layoutX="20.0" layoutY="122.0" mnemonicParsing="false" onAction="#Stop" text="STOP" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="158.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="158.0">
+               <children>
+                  <Text fx:id="door" layoutX="67.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children></AnchorPane>
         </items>
       </SplitPane>
    </left>
@@ -49,12 +52,12 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="64.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="level3" fitHeight="139.0" fitWidth="111.0" layoutX="64.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../img/closed.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="264.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="level4" fitHeight="139.0" fitWidth="111.0" layoutX="264.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../img/closed.png" />
                      </image>
@@ -64,18 +67,18 @@
                   <Button layoutX="219.0" layoutY="82.0" mnemonicParsing="false" onAction="#sendDown4" rotate="-90.0" text="&lt;" />
                   <Button layoutX="33.0" layoutY="66.0" mnemonicParsing="false" onAction="#sendUp3" rotate="90.0" text="&lt;" />
                   <Button layoutX="33.0" layoutY="98.0" mnemonicParsing="false" onAction="#sendDown3" rotate="270.0" text="&lt;" />
-                  <Circle fill="#36ff21" layoutX="45.0" layoutY="46.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fill="#ff1f1f" layoutX="232.0" layoutY="46.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="level3_idc" fill="#36ff21" layoutX="45.0" layoutY="46.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="level4_idc" fill="#ff1f1f" layoutX="232.0" layoutY="46.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="178.0" prefWidth="438.0">
                <children>
-                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="266.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="level2" fitHeight="139.0" fitWidth="111.0" layoutX="266.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../img/closed.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="139.0" fitWidth="111.0" layoutX="62.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="level1" fitHeight="139.0" fitWidth="111.0" layoutX="62.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../img/closed.png" />
                      </image>
@@ -85,8 +88,8 @@
                   <Button layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#sendUp1" rotate="90.0" text="&lt;" />
                   <Button layoutX="234.0" layoutY="62.0" mnemonicParsing="false" onAction="#sendUp2" rotate="90.0" text="&lt;" />
                   <Button layoutX="234.0" layoutY="94.0" mnemonicParsing="false" onAction="#sendDown2" rotate="270.0" text="&lt;" />
-                  <Circle fill="#ff1f1f" layoutX="35.0" layoutY="36.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fill="#ff1f1f" layoutX="247.0" layoutY="36.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="level1_idc" fill="#ff1f1f" layoutX="35.0" layoutY="36.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="level2_idc" fill="#ff1f1f" layoutX="247.0" layoutY="36.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
             </AnchorPane>
         </items>

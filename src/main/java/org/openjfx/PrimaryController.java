@@ -1,25 +1,59 @@
 package org.openjfx;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 
-public class PrimaryController {
+public class PrimaryController implements ControllerEventListener{
+
+    private Elevator elevator = new Elevator();
 
     private static MQTTConnection mqtt;
     static Logging Logger = new Logging();
-
-    public PrimaryController() {
-        mqtt = new MQTTConnection();
-        mqtt.SubToMqtt();
-    }
-
 
     @FXML
     private TextField username;
     @FXML
     private PasswordField password;
+
+    @FXML
+    private ImageView level1;
+
+    @FXML
+    private ImageView level2;
+
+    @FXML
+    private ImageView level3;
+
+    @FXML
+    private ImageView level4;
+
+    @FXML
+    private Text door;
+
+    Image doorOpenImage = new Image(new FileInputStream("src/main/resources/img/open.png"));
+    Image doorClosedImage = new Image(new FileInputStream("src/main/resources/img/closed.png"));
+
+
+    public PrimaryController() throws FileNotFoundException {
+        mqtt = new MQTTConnection();
+        elevator.setListener(this);
+        mqtt.SubToMqtt(elevator);
+        mqtt.FakeData("open", 2);
+    }
+
+//    public static void test() {
+//        System.out.println("TEST!");
+//    }
 
     //Navigation part of the Code
     //-----------------------------------------------------------------//
@@ -56,47 +90,70 @@ public class PrimaryController {
     //-----------------------------------------------------------------//
     @FXML
     void send1() throws IOException {
-        // MQTT CAll here
-        mqtt.PublishExample("Floor 1");
-        Logger.logged("Go Floor 1!");
+//        level1_door.setImage(doorOpen);
+//        RequestJSON json = new RequestJSON();
+//        json.setFloorSelection(1);
+//        json.setTimestamp(String.valueOf(new Date()));
+//        mqtt.PublishAction(json);
+//        Logger.logged("Go Floor 1!");
+        mqtt.FakeData("open", 1);
     }
 
     @FXML
     void send2() throws IOException {
-        // MQTT CAll here
-        mqtt.PublishExample("Floor 2");
-        Logger.logged("Go Floor 2!");
+//        RequestJSON json = new RequestJSON();
+//        json.setFloorSelection(2);
+//        json.setTimestamp(String.valueOf(new Date()));
+//        mqtt.PublishAction(json);
+//        Logger.logged("Go Floor 2!");
+        mqtt.FakeData("open", 2);
     }
 
     @FXML
     void send3() throws IOException {
-        // MQTT CAll here
-        mqtt.PublishExample("Floor 3");
-        Logger.logged("Go to Floor 3!");
+//        RequestJSON json = new RequestJSON();
+//        json.setFloorSelection(3);
+//        json.setTimestamp(String.valueOf(new Date()));
+//        mqtt.PublishAction(json);
+//        Logger.logged("Go to Floor 3!");
+        mqtt.FakeData("open", 3);
     }
 
     @FXML
     void send4() throws IOException {
-        // MQTT CAll here
-        mqtt.PublishExample("Floor 4");
-        Logger.logged("Go to Floor 4!");
+//        RequestJSON json = new RequestJSON();
+//        json.setFloorSelection(4);
+//        json.setTimestamp(String.valueOf(new Date()));
+//        mqtt.PublishAction(json);
+//        Logger.logged("Go to Floor 4!");
+        mqtt.FakeData("open", 4);
     }
 
     @FXML
     void closeDoor() throws IOException {
-        // MQTT CAll here
+        RequestJSON json = new RequestJSON();
+        json.setDoorButton("close");
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
         Logger.logged("Closing Door!");
     }
 
     @FXML
     void openDoor() throws IOException {
-        // MQTT CAll here
+        RequestJSON json = new RequestJSON();
+        json.setDoorButton("open");
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
+//        level1_door.setImage(doorOpen);
         Logger.logged("Opening Door!");
     }
 
     @FXML
     void Stop() throws IOException {
-        // MQTT CAll here
+        RequestJSON json = new RequestJSON();
+        json.setEmergencyStop(true);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
         Logger.logged("STOP!");
     }
     //-----------------------------------------------------------------//
@@ -105,81 +162,228 @@ public class PrimaryController {
     //-----------------------------------------------------------------//
     @FXML
     void sendUp1() throws IOException {
-        // MQTT CAll here
+        RequestJSON json = new RequestJSON();
+        json.setStopButtonUp(1);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
         Logger.logged("Call up 1!");
     }
 
     @FXML
     void sendUp2() throws IOException {
-        // MQTT CAll here
+        RequestJSON json = new RequestJSON();
+        json.setStopButtonUp(2);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
         Logger.logged("Call up 2!");
     }
 
     @FXML
     void sendUp3() throws IOException {
-        // MQTT CAll here
+        RequestJSON json = new RequestJSON();
+        json.setStopButtonUp(3);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
         Logger.logged("Call up 3!");
     }
 
     @FXML
     void sendDown4() throws IOException {
-        // MQTT CAll here
+        RequestJSON json = new RequestJSON();
+        json.setStopButtonDown(4);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
         Logger.logged("Call down 4!");
     }
 
     @FXML
     void sendDown3() throws IOException {
-        // MQTT CAll here
+        RequestJSON json = new RequestJSON();
+        json.setStopButtonDown(3);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
         Logger.logged("Call down 3!");
     }
 
     @FXML
     void sendDown2() throws IOException {
-        // MQTT CAll here
-        Logger.logged("Call down 3!");
+        RequestJSON json = new RequestJSON();
+        json.setStopButtonDown(2);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
+        Logger.logged("Call down 2!");
     }
     //-----------------------------------------------------------------//
 
     //ADMIN
     @FXML
-    void manualDoorOpen() throws IOException {
-        // MQTT CAll here
+    void manualDoorOpenStart() throws IOException {
+        RequestJSON json = new RequestJSON();
+        json.setManualDoor("open");
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
         Logger.logged("Manual Opening door!");
     }
 
     @FXML
-    void manualDoorClose() throws IOException {
-        // MQTT CAll here
+    void manualDoorCloseStart() throws IOException {
+        RequestJSON json = new RequestJSON();
+        json.setManualDoor("close");
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
         Logger.logged("Manual Closing door!");
     }
 
     @FXML
-    void manualUp() throws IOException {
-        // MQTT CAll here
-        Logger.logged("Manual up!");
+    void manualDoorStop() throws IOException {
+        RequestJSON json = new RequestJSON();
+        json.setManualDoor("stop");
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
+        Logger.logged("Manual door Stopping!");
     }
 
     @FXML
-    void manualDown() throws IOException {
-        // MQTT CAll here
-        Logger.logged("Manual down!");
+    void reset() throws IOException {
+        RequestJSON json = new RequestJSON();
+        json.setReset(true);
+        json.setTimestamp(String.valueOf(new Date()));
+        mqtt.PublishAction(json);
+        Logger.logged("Reset!");
     }
 
-    @FXML
-    void manualUp2() throws IOException {
-        // MQTT CAll here
-        Logger.logged("Manual up 2!");
-    }
-
-    @FXML
-    void manualDown2() throws IOException {
-        // MQTT CAll here
-        Logger.logged("Manual down 2!");
-    }
 
     @FXML
     void exitAdmin() throws IOException {
         App.setRoot("primary");
+    }
+
+    @Override
+    public void viewChanges(String changes) {
+        switch (changes){
+//            case "open":
+//                System.out.println("open");
+//                Platform.runLater(new Runnable(){
+//                    @Override
+//                    public void run() {
+//                        level1.setImage(doorOpenImage);
+//                    }
+//                });
+//                break;
+//            case "closed":
+//                Platform.runLater(new Runnable(){
+//                    @Override
+//                    public void run() {
+//                        level1.setImage(doorClosedImage);
+//                    }
+//                });
+//                System.out.println("closed");
+//                break;
+            case "pos1closed":
+                System.out.println("At Level 1");
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        door.setText("At Floor: 1");
+                        level1.setImage(doorClosedImage);
+                        level2.setImage(doorClosedImage);
+                        level3.setImage(doorClosedImage);
+                        level4.setImage(doorClosedImage);
+                    }
+                });
+                break;
+            case "pos2closed":
+                System.out.println("At Level 2");
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        door.setText("At Floor: 2");
+                        level1.setImage(doorClosedImage);
+                        level2.setImage(doorClosedImage);
+                        level3.setImage(doorClosedImage);
+                        level4.setImage(doorClosedImage);
+                    }
+                });
+                break;
+            case "pos3closed":
+                System.out.println("At Level 3");
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        door.setText("At Floor: 3");
+                        level1.setImage(doorClosedImage);
+                        level2.setImage(doorClosedImage);
+                        level3.setImage(doorClosedImage);
+                        level4.setImage(doorClosedImage);
+                    }
+                });
+                break;
+            case "pos4closed":
+                System.out.println("At Level 4");
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        door.setText("At Floor: 4");
+                        level1.setImage(doorClosedImage);
+                        level2.setImage(doorClosedImage);
+                        level3.setImage(doorClosedImage);
+                        level4.setImage(doorClosedImage);
+                    }
+                });
+                break;
+            case "pos1open":
+                System.out.println("At Level 1");
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        door.setText("At Floor: 1");
+                        level1.setImage(doorOpenImage);
+                        level2.setImage(doorClosedImage);
+                        level3.setImage(doorClosedImage);
+                        level4.setImage(doorClosedImage);
+                    }
+                });
+                break;
+            case "pos2open":
+                System.out.println("At Level 2");
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        door.setText("At Floor: 2");
+                        level1.setImage(doorClosedImage);
+                        level2.setImage(doorOpenImage);
+                        level3.setImage(doorClosedImage);
+                        level4.setImage(doorClosedImage);
+                    }
+                });
+                break;
+            case "pos3open":
+                System.out.println("At Level 3");
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        door.setText("At Floor: 3");
+                        level1.setImage(doorClosedImage);
+                        level2.setImage(doorClosedImage);
+                        level3.setImage(doorOpenImage);
+                        level4.setImage(doorClosedImage);
+                    }
+                });
+                break;
+            case "pos4open":
+                System.out.println("At Level 4");
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        door.setText("At Floor: 4");
+                        level1.setImage(doorClosedImage);
+                        level2.setImage(doorClosedImage);
+                        level3.setImage(doorClosedImage);
+                        level4.setImage(doorOpenImage);
+                    }
+                });
+                break;
+        }
     }
     //-----------------------------------------------------------------//
 }
