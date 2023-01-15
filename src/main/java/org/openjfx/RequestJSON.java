@@ -8,7 +8,16 @@ public class RequestJSON {
     private String doorButton;
     private String manualDoor;
     private Boolean reset;
+    private String userData;
     private String timestamp;
+
+    public String getUserData() {
+        return userData;
+    }
+
+    public void setUserData(String userData) {
+        this.userData = userData;
+    }
 
     public Integer getStopButtonDown() {
         return stopButtonDown;

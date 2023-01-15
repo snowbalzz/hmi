@@ -3,7 +3,7 @@ package org.openjfx;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -14,6 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 public class PrimaryController implements ControllerEventListener{
+
+    private Integer CurrentFloor;
 
     private Elevator elevator = new Elevator();
 
@@ -51,7 +53,14 @@ public class PrimaryController implements ControllerEventListener{
         mqtt = new MQTTConnection();
         elevator.setListener(this);
         mqtt.SubToMqtt(elevator);
-        mqtt.FakeData("open", 2);
+        amAlive();
+    }
+
+    void amAlive() {
+        RequestJSON json = new RequestJSON();
+        json.setUserData("int");
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
+        mqtt.PublishAction(json);
     }
 
 //    public static void test() {
@@ -95,7 +104,7 @@ public class PrimaryController implements ControllerEventListener{
     void send1() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setFloorSelection(1);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Go Floor 1!");
 //        mqtt.FakeData("open", 1);
@@ -105,7 +114,7 @@ public class PrimaryController implements ControllerEventListener{
     void send2() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setFloorSelection(2);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Go Floor 2!");
 //        mqtt.FakeData("open", 2);
@@ -115,7 +124,7 @@ public class PrimaryController implements ControllerEventListener{
     void send3() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setFloorSelection(3);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Go to Floor 3!");
 //        mqtt.FakeData("open", 3);
@@ -125,7 +134,7 @@ public class PrimaryController implements ControllerEventListener{
     void send4() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setFloorSelection(4);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Go to Floor 4!");
 //        mqtt.FakeData("open", 4);
@@ -135,7 +144,7 @@ public class PrimaryController implements ControllerEventListener{
     void closeDoor() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setDoorButton("close");
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Closing Door!");
     }
@@ -144,7 +153,7 @@ public class PrimaryController implements ControllerEventListener{
     void openDoor() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setDoorButton("open");
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Opening Door!");
     }
@@ -153,7 +162,7 @@ public class PrimaryController implements ControllerEventListener{
     void Stop() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setEmergencyStop(true);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("STOP!");
     }
@@ -165,7 +174,7 @@ public class PrimaryController implements ControllerEventListener{
     void sendUp1() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setStopButtonUp(1);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Call up 1!");
     }
@@ -174,7 +183,7 @@ public class PrimaryController implements ControllerEventListener{
     void sendUp2() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setStopButtonUp(2);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Call up 2!");
     }
@@ -183,7 +192,7 @@ public class PrimaryController implements ControllerEventListener{
     void sendUp3() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setStopButtonUp(3);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Call up 3!");
     }
@@ -192,7 +201,7 @@ public class PrimaryController implements ControllerEventListener{
     void sendDown4() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setStopButtonDown(4);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Call down 4!");
     }
@@ -201,7 +210,7 @@ public class PrimaryController implements ControllerEventListener{
     void sendDown3() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setStopButtonDown(3);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Call down 3!");
     }
@@ -210,7 +219,7 @@ public class PrimaryController implements ControllerEventListener{
     void sendDown2() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setStopButtonDown(2);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Call down 2!");
     }
@@ -221,7 +230,7 @@ public class PrimaryController implements ControllerEventListener{
     void manualDoorOpenStart() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setManualDoor("open");
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Manual Opening door!");
     }
@@ -230,7 +239,7 @@ public class PrimaryController implements ControllerEventListener{
     void manualDoorCloseStart() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setManualDoor("close");
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Manual Closing door!");
     }
@@ -239,7 +248,7 @@ public class PrimaryController implements ControllerEventListener{
     void manualDoorStop() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setManualDoor("stop");
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Manual door Stopping!");
     }
@@ -248,7 +257,7 @@ public class PrimaryController implements ControllerEventListener{
     void reset() throws IOException {
         RequestJSON json = new RequestJSON();
         json.setReset(true);
-        json.setTimestamp(String.valueOf(new Date()));
+        json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
         Logger.logged("Reset!");
     }
@@ -259,19 +268,16 @@ public class PrimaryController implements ControllerEventListener{
         App.setRoot("primary");
     }
 
+
     @Override
     public void viewChanges(String changes, String errorText) {
         switch (changes){
-            case "pos1closed":
-                System.out.println("At Level 1");
+            case "pos1":
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
                         flooridc.setText("At Floor: 1");
-                        level1.setImage(doorClosedImage);
-                        level2.setImage(doorClosedImage);
-                        level3.setImage(doorClosedImage);
-                        level4.setImage(doorClosedImage);
+                        CurrentFloor = 1;
                         outidc1.setText("F:1");
                         outidc2.setText("F:1");
                         outidc3.setText("F:1");
@@ -280,16 +286,12 @@ public class PrimaryController implements ControllerEventListener{
                     }
                 });
                 break;
-            case "pos2closed":
-                System.out.println("At Level 2");
+            case "pos2":
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
                         flooridc.setText("At Floor: 2");
-                        level1.setImage(doorClosedImage);
-                        level2.setImage(doorClosedImage);
-                        level3.setImage(doorClosedImage);
-                        level4.setImage(doorClosedImage);
+                        CurrentFloor = 2;
                         outidc1.setText("F:2");
                         outidc2.setText("F:2");
                         outidc3.setText("F:2");
@@ -298,16 +300,12 @@ public class PrimaryController implements ControllerEventListener{
                     }
                 });
                 break;
-            case "pos3closed":
-                System.out.println("At Level 3");
+            case "pos3":
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
                         flooridc.setText("At Floor: 3");
-                        level1.setImage(doorClosedImage);
-                        level2.setImage(doorClosedImage);
-                        level3.setImage(doorClosedImage);
-                        level4.setImage(doorClosedImage);
+                        CurrentFloor = 3;
                         outidc1.setText("F:3");
                         outidc2.setText("F:3");
                         outidc3.setText("F:3");
@@ -316,16 +314,12 @@ public class PrimaryController implements ControllerEventListener{
                     }
                 });
                 break;
-            case "pos4closed":
-                System.out.println("At Level 4");
+            case "pos4":
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
                         flooridc.setText("At Floor: 4");
-                        level1.setImage(doorClosedImage);
-                        level2.setImage(doorClosedImage);
-                        level3.setImage(doorClosedImage);
-                        level4.setImage(doorClosedImage);
+                        CurrentFloor = 4;
                         outidc1.setText("F:4");
                         outidc2.setText("F:4");
                         outidc3.setText("F:4");
@@ -334,79 +328,46 @@ public class PrimaryController implements ControllerEventListener{
                     }
                 });
                 break;
-            case "pos1open":
-                System.out.println("At Level 1");
+            case "closed":
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        flooridc.setText("At Floor: 1");
-                        level1.setImage(doorOpenImage);
-                        level2.setImage(doorClosedImage);
-                        level3.setImage(doorClosedImage);
-                        level4.setImage(doorClosedImage);
-                        outidc1.setText("F:1");
-                        outidc2.setText("F:1");
-                        outidc3.setText("F:1");
-                        outidc4.setText("F:1");
-                        error.setText(errorText);
-                    }
-                });
-                break;
-            case "pos2open":
-                System.out.println("At Level 2");
-                Platform.runLater(new Runnable(){
-                    @Override
-                    public void run() {
-                        flooridc.setText("At Floor: 2");
-                        level1.setImage(doorClosedImage);
-                        level2.setImage(doorOpenImage);
-                        level3.setImage(doorClosedImage);
-                        level4.setImage(doorClosedImage);
-                        outidc1.setText("F:2");
-                        outidc2.setText("F:2");
-                        outidc3.setText("F:2");
-                        outidc4.setText("F:2");
-                        error.setText(errorText);
-                    }
-                });
-                break;
-            case "pos3open":
-                System.out.println("At Level 3");
-                Platform.runLater(new Runnable(){
-                    @Override
-                    public void run() {
-                        flooridc.setText("At Floor: 3");
-                        level1.setImage(doorClosedImage);
-                        level2.setImage(doorClosedImage);
-                        level3.setImage(doorOpenImage);
-                        level4.setImage(doorClosedImage);
-                        outidc1.setText("F:3");
-                        outidc2.setText("F:3");
-                        outidc3.setText("F:3");
-                        outidc4.setText("F:3");
-                        error.setText(errorText);
-                    }
-                });
-                break;
-            case "pos4open":
-                System.out.println("At Level 4");
-                Platform.runLater(new Runnable(){
-                    @Override
-                    public void run() {
-                        flooridc.setText("At Floor: 4");
                         level1.setImage(doorClosedImage);
                         level2.setImage(doorClosedImage);
                         level3.setImage(doorClosedImage);
-                        level4.setImage(doorOpenImage);
-                        outidc1.setText("F:4");
-                        outidc2.setText("F:4");
-                        outidc3.setText("F:4");
-                        outidc4.setText("F:4");
-                        error.setText(errorText);
+                        level4.setImage(doorClosedImage);
+                    }
+                });
+                break;
+            case "open":
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        if(CurrentFloor == 1){
+                            level1.setImage(doorOpenImage);
+                            level2.setImage(doorClosedImage);
+                            level3.setImage(doorClosedImage);
+                            level4.setImage(doorClosedImage);
+                        } else if(CurrentFloor == 2){
+                            level1.setImage(doorClosedImage);
+                            level2.setImage(doorOpenImage);
+                            level3.setImage(doorClosedImage);
+                            level4.setImage(doorClosedImage);
+                        } else if(CurrentFloor == 3){
+                            level1.setImage(doorClosedImage);
+                            level2.setImage(doorClosedImage);
+                            level3.setImage(doorOpenImage);
+                            level4.setImage(doorClosedImage);
+                        } else if(CurrentFloor == 4){
+                            level1.setImage(doorClosedImage);
+                            level2.setImage(doorClosedImage);
+                            level3.setImage(doorClosedImage);
+                            level4.setImage(doorOpenImage);
+                        }
                     }
                 });
                 break;
         }
     }
-    //-----------------------------------------------------------------//
+//    -----------------------------------------------------------------//
 }

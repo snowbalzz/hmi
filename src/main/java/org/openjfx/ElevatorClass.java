@@ -6,21 +6,8 @@ public class ElevatorClass {
     private String errorState;
     private String timestamp;
 
-    private ElevatorListener pop;
-
-//    private static ElevatorClass Answer = new ElevatorClass();
-//
-//    public static ElevatorClass giveDoc(){
-//        return Answer;
-//    }
-
-    public void setListener(ElevatorListener listener) {
-        this.pop = listener;
-    }
-
     public void setDoorStatus(String doorStatus) {
         this.doorStatus = doorStatus;
-//        this.pop.elevatorChange(this.doorStatus);
     }
 
     public void setCurrentFloor(Integer currentFloor) {
