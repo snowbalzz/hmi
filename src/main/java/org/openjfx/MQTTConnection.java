@@ -64,21 +64,18 @@ public class MQTTConnection {
             sClient.setCallback(new MqttCallback() {
 
                 @Override
-                // Called when the client lost the connection to the broker
                 public void connectionLost(Throwable cause) {
                     Logger.logged("client lost connection " + cause);
                 }
 
                 @Override
                 public void messageArrived(String topic, MqttMessage m) throws JsonProcessingException {
-//                    Logger.logged("The Subscription from " + topic + ": " + m.toString());
                     ObjectMapper objectMapper = new ObjectMapper();
                     elevatorClass = objectMapper.readValue(m.toString(), ElevatorClass.class);
                     elevartor.elevatorChange(elevatorClass.getDoorStatus(), elevatorClass.getCurrentFloor(), elevatorClass.getErrorState());
                 }
 
                 @Override
-                // Called when an outgoing publish is complete
                 public void deliveryComplete(IMqttDeliveryToken token) {
                     Logger.logged("delivery complete " + token);
                 }
@@ -95,6 +92,7 @@ public class MQTTConnection {
             MqttMessage message = new MqttMessage();
             message.setPayload(m.getBytes());
             pClient.publish(publishTopic, message);
+            Logger.logged("Published to:" + publishTopic + "");
         } catch (MqttException m){
             Logger.logged(m.toString());
         } catch (JsonProcessingException e) {

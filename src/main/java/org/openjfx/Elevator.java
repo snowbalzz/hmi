@@ -7,14 +7,6 @@ public class Elevator implements ElevatorListener {
     private ControllerEventListener controllerEventListener;
     private static Elevator elevator = new Elevator();
 
-    public Elevator() {
-//        ElevatorClass.giveDoc().setListener(this);
-    }
-
-    public static Elevator getElevator() {
-        return elevator;
-    }
-
     public void setListener(ControllerEventListener listener) {
         this.controllerEventListener = listener;
     }
@@ -40,6 +32,9 @@ public class Elevator implements ElevatorListener {
             }
             if(Objects.equals(doorStatus, "open")){
                 controllerEventListener.viewChanges("open", error);
+            }
+            if(Objects.equals(doorStatus, "moving")){
+                controllerEventListener.viewChanges("moving", error);
             }
 
         }

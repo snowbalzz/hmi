@@ -53,6 +53,7 @@ public class PrimaryController implements ControllerEventListener{
         mqtt = new MQTTConnection();
         elevator.setListener(this);
         mqtt.SubToMqtt(elevator);
+        Logger.logged("Started the HMI visualization");
         amAlive();
     }
 
@@ -60,27 +61,27 @@ public class PrimaryController implements ControllerEventListener{
         RequestJSON json = new RequestJSON();
         json.setUserData("int");
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
+        Logger.logged("Update Request Sent");
         mqtt.PublishAction(json);
     }
-
-//    public static void test() {
-//        System.out.println("TEST!");
-//    }
 
     //Navigation part of the Code
     //-----------------------------------------------------------------//
     @FXML
     void cancelLogin() throws IOException {
         App.setRoot("primary");
+        Logger.logged("Log-in canceled");
     }
 
     @FXML
     void switchToLogin() throws IOException {
         App.setRoot("login");
+        Logger.logged("Switched to Log-in view");
     }
 
     @FXML
     void submitLogin() throws IOException {
+        Logger.logged("Authenticating");
         checkLoging();
     }
 
@@ -106,8 +107,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setFloorSelection(1);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Go Floor 1!");
-//        mqtt.FakeData("open", 1);
+        Logger.logged("USER: Button to go to 1. floor pressed");
     }
 
     @FXML
@@ -116,8 +116,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setFloorSelection(2);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Go Floor 2!");
-//        mqtt.FakeData("open", 2);
+        Logger.logged("USER: Button to go to 2. floor pressed");
     }
 
     @FXML
@@ -126,8 +125,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setFloorSelection(3);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Go to Floor 3!");
-//        mqtt.FakeData("open", 3);
+        Logger.logged("USER: Button to go to 3. floor pressed");
     }
 
     @FXML
@@ -136,7 +134,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setFloorSelection(4);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Go to Floor 4!");
+        Logger.logged("USER: Button to go to 4. floor pressed");
 //        mqtt.FakeData("open", 4);
     }
 
@@ -146,7 +144,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setDoorButton("close");
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Closing Door!");
+        Logger.logged("USER: Door CLOSE button pressed");
     }
 
     @FXML
@@ -155,7 +153,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setDoorButton("open");
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Opening Door!");
+        Logger.logged("USER: Door OPEN button pressed");
     }
 
     @FXML
@@ -164,7 +162,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setEmergencyStop(true);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("STOP!");
+        Logger.logged("USER: Elevator STOP button pressed");
     }
     //-----------------------------------------------------------------//
 
@@ -176,7 +174,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setStopButtonUp(1);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Call up 1!");
+        Logger.logged("USER: Request UP elevator button pressed on the 1. floor");
     }
 
     @FXML
@@ -185,7 +183,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setStopButtonUp(2);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Call up 2!");
+        Logger.logged("USER: Request UP elevator button pressed on the 2. floor");
     }
 
     @FXML
@@ -194,7 +192,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setStopButtonUp(3);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Call up 3!");
+        Logger.logged("USER: Request UP elevator button pressed on the 3. floor");
     }
 
     @FXML
@@ -203,7 +201,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setStopButtonDown(4);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Call down 4!");
+        Logger.logged("USER: Request DOWN elevator button pressed on the 4. floor");
     }
 
     @FXML
@@ -212,7 +210,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setStopButtonDown(3);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Call down 3!");
+        Logger.logged("USER: Request DOWN elevator button pressed on the 3. floor");
     }
 
     @FXML
@@ -221,7 +219,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setStopButtonDown(2);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Call down 2!");
+        Logger.logged("USER: Request DOWN elevator button pressed on the 2. floor");
     }
     //-----------------------------------------------------------------//
 
@@ -232,7 +230,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setManualDoor("open");
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Manual Opening door!");
+        Logger.logged("SUPERVISOR: Manual door OPEN request pressed");
     }
 
     @FXML
@@ -241,7 +239,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setManualDoor("close");
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Manual Closing door!");
+        Logger.logged("SUPERVISOR: Manual door CLOSE request pressed");
     }
 
     @FXML
@@ -250,7 +248,7 @@ public class PrimaryController implements ControllerEventListener{
         json.setManualDoor("stop");
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Manual door Stopping!");
+        Logger.logged("SUPERVISOR: Manual door STOP request pressed");
     }
 
     @FXML
@@ -259,13 +257,14 @@ public class PrimaryController implements ControllerEventListener{
         json.setReset(true);
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         mqtt.PublishAction(json);
-        Logger.logged("Reset!");
+        Logger.logged("SUPERVISOR: Elevator RESET pressed");
     }
 
 
     @FXML
     void exitAdmin() throws IOException {
         App.setRoot("primary");
+        Logger.logged("SUPERVISOR: EXIT pressed");
     }
 
 
@@ -273,6 +272,7 @@ public class PrimaryController implements ControllerEventListener{
     public void viewChanges(String changes, String errorText) {
         switch (changes){
             case "pos1":
+                Logger.logged("Elevator is at the 1. Floor");
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
@@ -287,6 +287,7 @@ public class PrimaryController implements ControllerEventListener{
                 });
                 break;
             case "pos2":
+                Logger.logged("Elevator is at the 2. Floor");
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
@@ -301,6 +302,7 @@ public class PrimaryController implements ControllerEventListener{
                 });
                 break;
             case "pos3":
+                Logger.logged("Elevator is at the 3. Floor");
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
@@ -315,6 +317,7 @@ public class PrimaryController implements ControllerEventListener{
                 });
                 break;
             case "pos4":
+                Logger.logged("Elevator is at the 4. Floor");
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
@@ -328,7 +331,11 @@ public class PrimaryController implements ControllerEventListener{
                     }
                 });
                 break;
+            case "moving":
+                Logger.logged("Door is moving");
+                break;
             case "closed":
+                Logger.logged("Door is closed");
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
@@ -336,10 +343,12 @@ public class PrimaryController implements ControllerEventListener{
                         level2.setImage(doorClosedImage);
                         level3.setImage(doorClosedImage);
                         level4.setImage(doorClosedImage);
+                        error.setText(errorText);
                     }
                 });
                 break;
             case "open":
+                Logger.logged("Door is open");
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
