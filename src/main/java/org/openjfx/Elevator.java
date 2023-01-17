@@ -5,9 +5,8 @@ import java.util.Objects;
 public class Elevator implements ElevatorListener {
 
     private ControllerEventListener controllerEventListener;
-    private static Elevator elevator = new Elevator();
 
-    public void setListener(ControllerEventListener listener) {
+    public void ConnectingListener(ControllerEventListener listener) {
         this.controllerEventListener = listener;
     }
 
@@ -36,7 +35,6 @@ public class Elevator implements ElevatorListener {
             if(Objects.equals(doorStatus, "moving")){
                 controllerEventListener.viewChanges("moving", error);
             }
-
         }
     }
 }

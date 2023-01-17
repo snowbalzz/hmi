@@ -20,6 +20,7 @@ public class PrimaryController implements ControllerEventListener{
     private Elevator elevator = new Elevator();
 
     private static MQTTConnection mqtt;
+
     static Logging Logger = new Logging();
 
     @FXML
@@ -51,7 +52,7 @@ public class PrimaryController implements ControllerEventListener{
 
     public PrimaryController() throws FileNotFoundException {
         mqtt = new MQTTConnection();
-        elevator.setListener(this);
+        elevator.ConnectingListener(this);
         mqtt.SubToMqtt(elevator);
         Logger.logged("Started the HMI visualization");
         amAlive();
@@ -59,7 +60,7 @@ public class PrimaryController implements ControllerEventListener{
 
     void amAlive() {
         RequestJSON json = new RequestJSON();
-        json.setUserData("int");
+        json.setUserData("init");
         json.setTimestamp(String.valueOf(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
         Logger.logged("Update Request Sent");
         mqtt.PublishAction(json);
@@ -223,7 +224,7 @@ public class PrimaryController implements ControllerEventListener{
     }
     //-----------------------------------------------------------------//
 
-    //ADMIN
+    //SUPERVISOR
     @FXML
     void manualDoorOpenStart() throws IOException {
         RequestJSON json = new RequestJSON();

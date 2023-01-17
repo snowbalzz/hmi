@@ -22,12 +22,6 @@ public class MQTTConnection {
     private static MqttClient pClient;
     private static MqttClient sClient;
 
-    private String pClientId = "Subscriber_HMI!";
-    private String sClientId = "Publisher_HMI!";
-
-    private String publishTopic = "/22WS-SysArch/H1";
-    private String subscribeTopic = "/22WS-SysArch/C1";
-
     static Logging Logger = new Logging();
 
     public MQTTConnection()  {
@@ -35,12 +29,14 @@ public class MQTTConnection {
     }
 
     /**
-     * Resson because I use Try and Cath is because that
+     * Resson because I use Try and Catch is because that
      * I dont have to implement "trows Exception"
-     * in every function that uses this class
+     * in every function that uses this function.
      */
     public void ServiceConnections()  {
         try {
+            String pClientId = "Subscriber_HMI!";
+            String sClientId = "Publisher_HMI!";
 //            ssh -L 1888:localhost:1883 FHKN.da351ale@ea-pc165.ei.htwg-konstanz.de
             sClient = new MqttClient("tcp://localhost:1888", sClientId, null);
             pClient = new MqttClient("tcp://localhost:1888", pClientId, null);
@@ -51,6 +47,7 @@ public class MQTTConnection {
 
             sClient.connect(mqttConnectOptions);
             pClient.connect(mqttConnectOptions);
+
             Logger.logged("Connected to MQTT Subscriber and Publisher");
         } catch (MqttException m){
             Logger.logged(m.toString());
@@ -59,6 +56,7 @@ public class MQTTConnection {
 
     public void SubToMqtt(Elevator elevartor){
         try {
+            String subscribeTopic = "/22WS-SysArch/C1";
             sClient.subscribe(subscribeTopic);
             Logger.logged("Subscribed to:" + subscribeTopic + "");
             sClient.setCallback(new MqttCallback() {
@@ -89,9 +87,13 @@ public class MQTTConnection {
         try{
             ObjectMapper objectMapper = new ObjectMapper();
             String m = objectMapper.writeValueAsString(request);
+
             MqttMessage message = new MqttMessage();
             message.setPayload(m.getBytes());
+
+            String publishTopic = "/22WS-SysArch/H1";
             pClient.publish(publishTopic, message);
+
             Logger.logged("Published to:" + publishTopic + "");
         } catch (MqttException m){
             Logger.logged(m.toString());
